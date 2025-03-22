@@ -1,0 +1,28 @@
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\bin\Debug\net9.0\Client.exe
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\bin\Debug\net9.0\Client.deps.json
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\bin\Debug\net9.0\Client.runtimeconfig.json
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\bin\Debug\net9.0\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\bin\Debug\net9.0\Client.pdb
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.AssemblyInfo.cs
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\refint\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.pdb
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\Client.genruntimeconfig.cache
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat Room\Client\obj\Debug\net9.0\ref\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\bin\Debug\net9.0\Client.exe
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\bin\Debug\net9.0\Client.deps.json
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\bin\Debug\net9.0\Client.runtimeconfig.json
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\bin\Debug\net9.0\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\bin\Debug\net9.0\Client.pdb
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.AssemblyInfo.cs
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\refint\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.pdb
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.genruntimeconfig.cache
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\ref\Client.dll

@@ -1,0 +1,104 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5F2AD741-D63D-4CB7-8F64-19315813CC96}|Client\\Client.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F2AD741-D63D-4CB7-8F64-19315813CC96}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7B9ADE-6D38-4F92-9BF9-0472BF208544}|UI\\UI.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\ui\\chat_screen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C7B9ADE-6D38-4F92-9BF9-0472BF208544}|UI\\UI.csproj|solutionrelative:ui\\chat_screen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7B9ADE-6D38-4F92-9BF9-0472BF208544}|UI\\UI.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\ui\\chat_screen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8C7B9ADE-6D38-4F92-9BF9-0472BF208544}|UI\\UI.csproj|solutionrelative:ui\\chat_screen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7B9ADE-6D38-4F92-9BF9-0472BF208544}|UI\\UI.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\ui\\main_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8C7B9ADE-6D38-4F92-9BF9-0472BF208544}|UI\\UI.csproj|solutionrelative:ui\\main_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAlwB8AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T17:45:51.567Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Chat_Screen.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Chat_Screen.cs",
+              "RelativeDocumentMoniker": "UI\\Chat_Screen.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Chat_Screen.cs",
+              "RelativeToolTip": "UI\\Chat_Screen.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T17:18:03.076Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Main_Menu.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Main_Menu.cs",
+              "RelativeDocumentMoniker": "UI\\Main_Menu.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Main_Menu.cs [Design]",
+              "RelativeToolTip": "UI\\Main_Menu.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T18:03:08.073Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Chat_Screen.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Chat_Screen.cs",
+              "RelativeDocumentMoniker": "UI\\Chat_Screen.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Chat_Screen.cs [Design]",
+              "RelativeToolTip": "UI\\Chat_Screen.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T17:56:26.599Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
