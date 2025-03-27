@@ -88,9 +88,19 @@ namespace Server
             return encoder.GetString(buffer, 0, bytesRead);
         }
 
-        private static void Send_to_All(Client sender, string msg)
+        private static void Send_to_All(Client sender, string msg, bool decorator = true)
         {
-            string formattedMessage = $"[{DateTime.Now:HH:mm}] {sender.username}: {msg}\n";
+            string formattedMessage;
+
+            if (decorator == true)
+            {
+                formattedMessage = $"[{DateTime.Now:HH:mm}] {sender.username}: {msg}\n";
+            }
+            else
+            {
+                formattedMessage = msg;
+            }
+
             foreach (var client in ActiveClient)
             {
                 if (client == sender) continue;
@@ -172,6 +182,10 @@ namespace Server
                 NetworkStream stream = client.TcpClient.GetStream();
 
                 Console.WriteLine($"Client connected: {client.TcpClient.Client.RemoteEndPoint}");
+
+                Send_to_All(client, $"[SERVER]: {client.username} joined the chat.");
+                Send_to_All(client, $"/new_client {client.username}");
+
 
                 byte[] buffer = new byte[1024];
                 int bytesRead;

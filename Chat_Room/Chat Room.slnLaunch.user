@@ -18,6 +18,10 @@
     "Name": "New Profile (1)",
     "Projects": [
       {
+        "Path": "Server\\Server.csproj",
+        "Action": "Start"
+      },
+      {
         "Path": "UI\\UI.csproj",
         "Action": "Start"
       }

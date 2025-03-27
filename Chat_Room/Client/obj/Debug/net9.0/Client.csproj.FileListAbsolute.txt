@@ -26,3 +26,4 @@ C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\
 C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.pdb
 C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.genruntimeconfig.cache
 C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\ref\Client.dll
+C:\Users\User\Desktop\vuk\programiranje\C#\Chat_Room\Chat_Room\Client\obj\Debug\net9.0\Client.sourcelink.json

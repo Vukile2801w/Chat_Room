@@ -8,28 +8,37 @@ namespace Client
 {
     public class Client_Network
     {
-        private static readonly List<string> EXIT_WORDS = new List<string> { "exit", "quit" };
-        private static bool isActive = false;
-        private static string username = "New User";
-        private static string userMessage = "";
-        public static readonly Encoding default_encoder = Encoding.UTF8;
+        private readonly List<string> EXIT_WORDS = new List<string> { "exit", "quit" };
+        private bool isActive = false;
+        public string username = "New User";
+        private string userMessage = "";
+        public readonly Encoding default_encoder = Encoding.UTF8;
 
-        
+        private NetworkStream server_stream;
+
+
+        // Eventss
+        public delegate void Primljena_Poruka(string message);
+        public delegate void Novi_Korisnik(string message);
+        public delegate void Uklonjen_Korisnik(string message);
+
+        public static event Primljena_Poruka OnNewMessage;
+        public static event Novi_Korisnik OnNewUser;
+        public static event Uklonjen_Korisnik OnExitUser;
+
+
+
         static void Main(string[] args)
         {
             
-
         }
-        
 
 
-        public Client_Network()
+
+        public Client_Network(IPAddress ip, int port, string username)
         {
-            Console.Write("Input address and port to connect to server\nAddr: ");
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1"); // Console.ReadLine()
+            IPAddress ipAddress = ip;
 
-            Console.Write("Port: ");
-            int port = int.Parse("5050");  // Console.ReadLine()
 
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, port);
             TcpClient client = new TcpClient();
@@ -39,55 +48,81 @@ namespace Client
             Console.WriteLine("Connected!");
 
 
-            Console.WriteLine("To set your username type: \n\b/username set {username}\b");
-
 
 
 
             NetworkStream stream = client.GetStream();
-
+            server_stream = stream;
 
             if (stream != null)
             {
                 isActive = true;
             }
 
-            Send_to(stream, "/username get -nr", default_encoder);
+            Send_to(server_stream, $"/username set {username}", default_encoder);
 
             byte[] buffer = new byte[1024];
-            username = Recv_from(buffer, stream.Read(buffer, 0, buffer.Length), default_encoder);
+            username = Recv_from(buffer, server_stream.Read(buffer, 0, buffer.Length), default_encoder);
             Console.WriteLine(username);
 
 
-            Task receiveTask = Task.Run(() => HandleReceiveMessages(stream));
-            Task sendTask = Task.Run(() => HandleSendMessages(stream));
+            Task receiveTask = Task.Run(() => HandleReceiveMessages(server_stream));
+            Task sendTask = Task.Run(() => HandleSendMessages(server_stream));
 
             Task.WaitAny(receiveTask, sendTask);
 
             Console.WriteLine("Closing connection...");
 
-            stream.Close();
+            server_stream.Close();
             client.Close();
         }
 
 
 
-        private static void Send_to(NetworkStream stream, string msg, Encoding encoder)
+        private void Send_to(NetworkStream stream, string msg, Encoding encoder)
         {
-            string packet = msg;
+            try
+            {
+                if (stream == null || !stream.CanWrite)
+                {
+                    Console.WriteLine("Error: Cannot send message, connection is closed.");
+                    return;
+                }
 
-            byte[] encoded_msg = encoder.GetBytes(packet);
-            stream.Write(encoded_msg, 0, encoded_msg.Length);
+                byte[] encoded_msg = encoder.GetBytes(msg);
+                stream.Write(encoded_msg, 0, encoded_msg.Length);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Console.WriteLine("Error: Tried to use a disposed NetworkStream - " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unexpected error while sending: " + ex.Message);
+            }
         }
 
-        private static string Recv_from(byte[] buffer, int bytesRead, Encoding encoder)
+
+        public void Send(string msg)
+        {
+            if (server_stream == null || !server_stream.CanWrite)
+            {
+                Console.WriteLine("Error: Cannot send message, connection is closed.");
+                return;
+            }
+
+            Send_to(server_stream, msg, default_encoder);
+        }
+
+
+        private string Recv_from(byte[] buffer, int bytesRead, Encoding encoder)
         {
             return encoder.GetString(buffer, 0, bytesRead);
         }
 
 
 
-        static void HandleReceiveMessages(NetworkStream stream)
+        void HandleReceiveMessages(NetworkStream stream)
         {
             byte[] buffer = new byte[1024];
 
@@ -98,19 +133,22 @@ namespace Client
                     int bytesRead = stream.Read(buffer, 0, buffer.Length);
                     if (bytesRead == 0) break;
 
-                    int lastLine = Console.CursorTop;
-                    Console.SetCursorPosition(0, lastLine);
-
-                    // Prekrij liniju praznim karakterima
-                    Console.Write(new string(' ', Console.WindowWidth));
-
-                    // Vrati kursor na početak obrisane linije (ne mora ako ne želiš da pišeš ponovo)
-                    Console.SetCursorPosition(0, lastLine);
 
                     string message = Recv_from(buffer, bytesRead, default_encoder);
-                    Console.WriteLine(message.Trim());  // Trim da ne dodaje dodatne prazne redove
-                    Console.Write($"{username}: {userMessage}");  // Ispis za sledeći unos
 
+                    switch (message.Split(' ')[0])
+                    {
+                        case "/new_client":
+                            OnNewUser?.Invoke(message.Split(' ')[1]);
+                            break;
+                        case "/exit_client":
+                            OnExitUser?.Invoke(message.Split(' ')[1]);
+                            break;
+
+                        default:
+                            OnNewMessage?.Invoke(message);
+                            break;
+                    }
 
                 }
             }
@@ -123,7 +161,7 @@ namespace Client
         }
 
 
-        static void HandleSendMessages(NetworkStream stream)
+        void HandleSendMessages(NetworkStream stream)
         {
             try
             {
