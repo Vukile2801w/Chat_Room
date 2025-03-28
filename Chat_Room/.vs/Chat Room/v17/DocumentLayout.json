@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{75645349-58FF-4322-8DF3-51EDADA9F382}|UI\\UI.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75645349-58FF-4322-8DF3-51EDADA9F382}|UI\\UI.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E63AE2BF-3F66-4F44-888F-27C7CD272F41}|Server\\Server.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E63AE2BF-3F66-4F44-888F-27C7CD272F41}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F2AD741-D63D-4CB7-8F64-19315813CC96}|Client\\Client.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F2AD741-D63D-4CB7-8F64-19315813CC96}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75645349-58FF-4322-8DF3-51EDADA9F382}|UI\\UI.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75645349-58FF-4322-8DF3-51EDADA9F382}|UI\\UI.csproj|solutionrelative:ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75645349-58FF-4322-8DF3-51EDADA9F382}|UI\\UI.csproj|c:\\users\\user\\desktop\\vuk\\programiranje\\c#\\chat_room\\chat_room\\ui\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,19 +46,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
-              "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
-              "RelativeToolTip": "UI\\Form1.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwDUAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T21:03:55.239Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
@@ -66,52 +53,44 @@
               "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs [Design]",
               "RelativeToolTip": "UI\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T19:33:29.418Z",
+              "WhenOpened": "2025-03-28T15:12:12.156Z",
               "EditorCaption": " [Design]"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "a1695797-e870-4f1b-b29f-9bc7968679bf",
-        "Display": 1,
-        "X": -66,
-        "Y": 375,
-        "Width": 1252,
-        "Height": 805,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
-              "RelativeDocumentMoniker": "Client\\Program.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
-              "RelativeToolTip": "Client\\Program.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAkwIwAAAApAAAAAAAAAA==",
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
+              "RelativeDocumentMoniker": "UI\\Form1.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
+              "RelativeToolTip": "UI\\Form1.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAmwDsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T20:07:28.684Z",
+              "WhenOpened": "2025-03-27T21:03:55.239Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAWwIoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T20:07:28.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Server\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Server\\Program.cs",
               "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAjwLoAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAiwIkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T20:21:28.504Z",
               "EditorCaption": ""

@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,19 +46,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
-              "RelativeDocumentMoniker": "UI\\Form1.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
-              "RelativeToolTip": "UI\\Form1.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwDUAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T21:03:55.239Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
@@ -66,30 +53,22 @@
               "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs [Design]",
               "RelativeToolTip": "UI\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T19:33:29.418Z",
+              "WhenOpened": "2025-03-28T15:12:12.156Z",
               "EditorCaption": " [Design]"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "a1695797-e870-4f1b-b29f-9bc7968679bf",
-        "Display": 1,
-        "X": -66,
-        "Y": 375,
-        "Width": 1252,
-        "Height": 805,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
+              "RelativeDocumentMoniker": "UI\\Form1.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\UI\\Form1.cs",
+              "RelativeToolTip": "UI\\Form1.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAmwDsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T21:03:55.239Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -98,7 +77,7 @@
               "RelativeDocumentMoniker": "Client\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Client\\Program.cs",
               "RelativeToolTip": "Client\\Program.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAkwIwAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAWwIoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T20:07:28.684Z",
               "EditorCaption": ""
@@ -111,7 +90,7 @@
               "RelativeDocumentMoniker": "Server\\Program.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\vuk\\programiranje\\C#\\Chat_Room\\Chat_Room\\Server\\Program.cs",
               "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAjwLoAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAiwIkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T20:21:28.504Z",
               "EditorCaption": ""

@@ -6,9 +6,13 @@ namespace UI
     public partial class Form1 : Form
     {
 
+
+
         // Server
         private IPAddress ip_adress;
         private int port;
+        //               username, line in textbox
+        private Dictionary<string, int> Active_Users = new Dictionary<string, int>();
 
         // Client
         private Client_Network client;
@@ -25,17 +29,7 @@ namespace UI
             scene.Add("MainMenu", MainMenu);
             scene.Add("Chat", Caskanje);
 
-            Client_Network.OnNewMessage += (msg) => { Chat_History.Text += $"{msg}\n"; };
-            Client_Network.OnNewUser += (msg) => { Active_Users_textbox.Text += $"{msg}\n"; };
-            Client_Network.OnExitUser += (msg) => {
-                foreach (string user in Active_Users_textbox.Text.Split('\n'))
-                {
-                    if (user == msg)
-                    {
-                        Active_Users_textbox.Text.Replace(user, "");
-                    }
-                }
-            };
+            
 
         }
 
@@ -45,20 +39,61 @@ namespace UI
         }
 
 
-        private void Promeni_Scenu(string scena)
+        private void Handle_New_Message(string msg)
         {
-            foreach (Panel panel in scene.Values)
+            Invoke((MethodInvoker)delegate {
+                Chat_History.Text += $"{msg}\n"; 
+            });
+        }
+
+        private void Handle_New_Client(string msg)
+        {
+            if (Active_Users.ContainsKey(msg)) return;
+            else
             {
-                if (panel.Name == scene[scena].Name)
+                Invoke((MethodInvoker)delegate {
+                    Active_Users.Add(msg, Active_Users.Count);
+                    Active_Users_textbox.Text += $"{msg}\n";  // Dodavanje korisnika u tekstbox
+                });
+            }
+
+            
+        }
+
+
+        private void Handle_Exit_Client(string msg)
+        {
+            if (Active_Users.ContainsKey(msg))
+            {
+                int user_for_remove_index = Active_Users[msg];
+
+                // Pomeri sve korisnike iznad jednog prema dolje
+                foreach (var key in Active_Users.Keys.ToList())  // .ToList() da se izbegne modifikacija kolekcije tokom iteracije
                 {
-                    panel.Visible = true;
+                    if (Active_Users[key] > user_for_remove_index)
+                    {
+                        Active_Users[key]--;
+                    }
                 }
-                else
-                {
-                    panel.Visible = false;
-                }
+
+                // Ukloni korisnika iz liste
+                Invoke((MethodInvoker)delegate {
+                    Active_Users.Remove(msg);
+                    Active_Users_textbox.Text = string.Join("\n", Active_Users.Keys);  // Ponovo popuni TextBox
+                });
             }
         }
+
+
+
+        private void Promeni_Scenu(string scena)
+        {
+            foreach (var entry in scene)
+            {
+                entry.Value.Visible = (entry.Key == scena);
+            }
+        }
+
 
 
         private void Povezi_Se_Click(object sender, EventArgs e)
@@ -81,6 +116,11 @@ namespace UI
             try
             {
                 client = new Client_Network(ip_adress, port, username);
+
+                client.OnNewMessage += Handle_New_Message;
+                client.OnNewUser += Handle_New_Client;
+                client.OnExitUser += Handle_Exit_Client;
+
             }
             catch (Exception ex)
             {
@@ -89,13 +129,22 @@ namespace UI
             }
 
 
+            
+
+
+
             Promeni_Scenu("Chat");
 
         }
 
         private void Posalji_Click(object sender, EventArgs e)
         {
-            string poruka = Poruka_textbox.Text;
+            string poruka = (Poruka_textbox.Text).Trim();
+
+            if (poruka == "")
+            {
+                return;
+            }
 
             try
             {
@@ -108,7 +157,7 @@ namespace UI
                 return;
             }
 
-            Port_textbox.Clear();
+            Poruka_textbox.Clear();
         }
 
         private void Poruka_textbox_TextChanged(object sender, EventArgs e)

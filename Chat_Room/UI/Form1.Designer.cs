@@ -36,13 +36,13 @@
             Active_Users_textbox = new RichTextBox();
             Poruka_textbox = new TextBox();
             MainMenu = new Panel();
+            IP_textbox = new TextBox();
             label5 = new Label();
             Username_textbox = new TextBox();
             Povezi_Se = new Button();
             label4 = new Label();
             label3 = new Label();
             Port_textbox = new TextBox();
-            IP_textbox = new TextBox();
             Caskanje.SuspendLayout();
             MainMenu.SuspendLayout();
             SuspendLayout();
@@ -102,9 +102,9 @@
             // Active_Users_textbox
             // 
             Active_Users_textbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            Active_Users_textbox.Location = new Point(712, 18);
+            Active_Users_textbox.Location = new Point(702, 18);
             Active_Users_textbox.Name = "Active_Users_textbox";
-            Active_Users_textbox.Size = new Size(162, 595);
+            Active_Users_textbox.Size = new Size(172, 595);
             Active_Users_textbox.TabIndex = 1;
             Active_Users_textbox.Text = "";
             // 
@@ -118,18 +118,26 @@
             // 
             // MainMenu
             // 
+            MainMenu.Controls.Add(IP_textbox);
             MainMenu.Controls.Add(label5);
             MainMenu.Controls.Add(Username_textbox);
             MainMenu.Controls.Add(Povezi_Se);
             MainMenu.Controls.Add(label4);
             MainMenu.Controls.Add(label3);
             MainMenu.Controls.Add(Port_textbox);
-            MainMenu.Controls.Add(IP_textbox);
             MainMenu.Dock = DockStyle.Fill;
             MainMenu.Location = new Point(0, 0);
             MainMenu.Name = "MainMenu";
             MainMenu.Size = new Size(944, 681);
             MainMenu.TabIndex = 8;
+            // 
+            // IP_textbox
+            // 
+            IP_textbox.Location = new Point(369, 284);
+            IP_textbox.Name = "IP_textbox";
+            IP_textbox.Size = new Size(100, 23);
+            IP_textbox.TabIndex = 0;
+            IP_textbox.Text = "192.168.0.29";
             // 
             // label5
             // 
@@ -146,6 +154,7 @@
             Username_textbox.Name = "Username_textbox";
             Username_textbox.Size = new Size(156, 23);
             Username_textbox.TabIndex = 5;
+            Username_textbox.Text = "User0";
             // 
             // Povezi_Se
             // 
@@ -181,13 +190,7 @@
             Port_textbox.Name = "Port_textbox";
             Port_textbox.Size = new Size(49, 23);
             Port_textbox.TabIndex = 1;
-            // 
-            // IP_textbox
-            // 
-            IP_textbox.Location = new Point(369, 284);
-            IP_textbox.Name = "IP_textbox";
-            IP_textbox.Size = new Size(100, 23);
-            IP_textbox.TabIndex = 0;
+            Port_textbox.Text = "5050";
             // 
             // Form1
             // 

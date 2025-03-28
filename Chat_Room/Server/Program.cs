@@ -4,14 +4,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
+using System.Collections.Concurrent;
 
 namespace Server
 {
     class Program
     {
-
         public static uint curect_id = 0;
+        private static readonly object clientListLock = new object();
 
         private class Client
         {
@@ -20,217 +20,146 @@ namespace Server
             public string username;
             public uint ID;
 
-
             public Client(TcpClient tcpClient)
             {
                 TcpClient = tcpClient;
                 stream = TcpClient.GetStream();
                 ID = curect_id++;
-                username = "Guest" + ID; // Dodajemo podrazumevani username
+                username = "Guest" + ID;
             }
-
-
-            public Client(TcpClient tcpClient, string name)
-            {
-                TcpClient = tcpClient;
-                stream = TcpClient.GetStream();
-
-                ID = curect_id++;
-                
-                username = name;
-            }
-            public static bool operator ==(Client c1, Client c2)
-            {
-                return c1.ID == c2.ID;
-            }
-
-            public static bool operator !=(Client c1, Client c2)
-            {
-                return c1.ID != c2.ID;
-            }
-
-            public override bool Equals(object obj)
-            {
-                return obj is Client other && this.ID == other.ID;
-            }
-
-            public override int GetHashCode()
-            {
-                return ID.GetHashCode();
-            }
-
         }
 
         private static readonly List<string> EXIT_WORDS = new List<string> { "exit", "quit" };
         private static List<Client> ActiveClient = new List<Client>();
         private static readonly Encoding default_encoder = Encoding.UTF8;
-        private static volatile bool serverRunning = true;  // Volatile osigurava da nitovi vide ažuriranu vrednost
-
-        private static int Get_Index_Client(List<Client> active_client, Client client)
-        {
-            for (int i = 0; i < active_client.Count; i++)
-            {
-                if (active_client[i] == client) 
-                    return i;
-            }
-
-            return -1;
-        }
+        private static volatile bool serverRunning = true;
 
         private static void Send_to(Client client, string msg, Encoding encoder)
         {
-            byte[] encoded_msg = encoder.GetBytes(msg);
-            client.stream.Write(encoded_msg, 0, encoded_msg.Length);
+            try
+            {
+                byte[] encoded_msg = encoder.GetBytes(msg);
+                client.stream.Write(encoded_msg, 0, encoded_msg.Length);
+            }
+            catch (IOException)
+            {
+                Console.WriteLine($"Greška pri slanju podataka klijentu {client.username}, zatvaranje veze.");
+                lock (clientListLock)
+                {
+                    ActiveClient.Remove(client);
+                }
+                client.TcpClient.Close();
+            }
         }
 
         private static string Recv_from(byte[] buffer, int bytesRead, Encoding encoder)
         {
+            if (bytesRead <= 0) return string.Empty;
             return encoder.GetString(buffer, 0, bytesRead);
         }
 
         private static void Send_to_All(Client sender, string msg, bool decorator = true)
         {
-            string formattedMessage;
+            string formattedMessage = decorator ? $"{sender.username}: {msg}" : msg;
 
-            if (decorator == true)
+            lock (clientListLock)
             {
-                formattedMessage = $"[{DateTime.Now:HH:mm}] {sender.username}: {msg}\n";
-            }
-            else
-            {
-                formattedMessage = msg;
-            }
-
-            foreach (var client in ActiveClient)
-            {
-                if (client == sender) continue;
-
-                NetworkStream stream = client.TcpClient.GetStream();
-                Send_to(sender, formattedMessage, default_encoder);
+                for (int i = ActiveClient.Count - 1; i >= 0; i--)
+                {
+                    var client = ActiveClient[i];
+                    if (client != null) if (client == sender) continue;
+                    
+                    Send_to(client, formattedMessage, default_encoder);
+                    
+                }
             }
         }
+
 
         private static string HandleCommand(Client client, string msg)
         {
+            if (string.IsNullOrWhiteSpace(msg) || msg.Length < 2 || msg[0] != '/')
+            {
+                return "";
+            }
+
+            msg = msg.Substring(1);
+            string[] tokens = msg.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (tokens.Length == 0) return "";
+
+            string command = tokens[0].ToLower();
             string response = "";
 
-            // Provera da li string nije prazan i da počinje s '!'
-            if (string.IsNullOrWhiteSpace(msg) || msg.Length < 2)
+            if (command == "username" && tokens.Length > 1)
             {
-                return response;
+                if (tokens[1] == "get")
+                    response = client.username;
+                else if (tokens[1] == "set" && tokens.Length > 2)
+                {
+                    client.username = tokens[2].Trim();
+                    response = "Postavljeno";
+                }
             }
-
-            msg = msg.Substring(1); // Uklanjamo prvi znak ('!')
-            string[] tokens = msg.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            if (tokens.Length == 0)
-            {
-                return response;
-            }
-
-            string command = tokens[0];
-            string subcommand = tokens.Length > 1 ? tokens[1] : null;
-
-            switch (command.ToLower()) // Ignorišemo velika/mala slova
-            {
-                case "username":
-                    if (subcommand == null)
-                    {
-                        return response;
-                    }
-
-                    switch (subcommand.ToLower())
-                    {
-                        case "get":
-                            response = client.username;
-                            break;
-
-                        case "set":
-                            if (tokens.Length > 2)
-                            {
-                                client.username = tokens[2];
-                                response = "Postavljeno.";
-                            }
-                            else
-                            {
-                                response = "Greška: Nedostaje korisničko ime za 'username set'.";
-                            }
-                            break;
-
-                        default:
-                            response = $"Nevažeća podkomanda: {subcommand}";
-                            break;
-                    }
-                    break;
-
-                default:
-                    response = $"Nepoznata komanda: {command}";
-                    break;
-            }
-
-            if (tokens.Length > 0 && tokens[tokens.Length - 1] == "-nr")
-                return $"{response} -nr";
-            else
-                return response;
+            return response.EndsWith("-nr") ? response[..^4] : response;
         }
 
 
+        private static string lastReceivedMessage = "";
         private static void HandleClient(Client client)
         {
             try
             {
                 NetworkStream stream = client.TcpClient.GetStream();
 
-                Console.WriteLine($"Client connected: {client.TcpClient.Client.RemoteEndPoint}");
-
-                Send_to_All(client, $"[SERVER]: {client.username} joined the chat.");
-                Send_to_All(client, $"/new_client {client.username}");
-
 
                 byte[] buffer = new byte[1024];
                 int bytesRead;
+                bytesRead = stream.Read(buffer, 0, buffer.Length);
+                HandleCommand(client, Recv_from(buffer, bytesRead, default_encoder));
 
-                string username = HandleCommand(client, Recv_from(buffer, stream.Read(buffer, 0, buffer.Length), default_encoder));
-                username = username.Remove(username.Length - ("-nr".Length + 1));
+                Console.WriteLine($"Client connected: {client.TcpClient.Client.RemoteEndPoint} ({client.username})");
 
-                Send_to(
-                    client,
-                    username,
-                    default_encoder
-                    );
+                Send_to(client, $"[SERVER]: Welcome to the chat, {client.username}!", default_encoder);
 
-                // Pošaljemo ovu poruku samo jednom pri povezivanju!
-                Send_to(client, "[SERVER]: Connection established\n", default_encoder);
+                // Obaveštavanje novog klijenta da se povezao i slanje liste postojećih korisnika.
+                Send_to_All(client, $"/new_client {client.username}", false); // Novi klijent se obaveštava da se povezao.
+                
+
+                foreach (Client c in ActiveClient)
+                {
+                    Console.WriteLine($"Sending /new_client to {c.username}...");
+                    Send_to(client, $"/new_client {c.username}", default_encoder);
+                    Thread.Sleep(25);
+                }
+
+
+
+
+
+
+
+                Send_to_All(client, $"[SERVER]: {client.username} joined the chat.");
+
                 while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                 {
+                    if (bytesRead == 0) break;
+
                     string receivedMessage = Recv_from(buffer, bytesRead, default_encoder);
 
-                    if (receivedMessage[0] == '/')
+                    if (receivedMessage == lastReceivedMessage)
                     {
-                        string response = HandleCommand(client, receivedMessage);
-
-                        if (!string.IsNullOrEmpty(response))
-                        {
-                            bool is_no_replay = response.EndsWith("-nr");
-
-                            if (!response.StartsWith("[SERVER]:") && !is_no_replay)
-                            {
-                                response = $"[SERVER]: {response}";
-                            }
-                            if (is_no_replay)
-                            {
-                                response.Remove(response.Length - ("-nr".Length + 1));
-                            }
-
-                            Send_to(client, response + "\n", default_encoder);
-                        }
-                        continue;
+                        continue; // Ignoriši duplikate
                     }
 
-                    string packet = $"{client.username}: {receivedMessage}";
-                    Console.WriteLine($"Received: {packet.Trim()}");
+                    if (HandleCommand(client, receivedMessage) == "Postavljeno")
+                    {
+                        continue;
+                    }
+                    
 
-                    Send_to_All(client, packet);
+                    lastReceivedMessage = receivedMessage; // Zapamti poslednju poruku
+                    Console.WriteLine($"Received: {client.username}: {receivedMessage.Trim()}");
+                    Send_to_All(client, receivedMessage);
                 }
             }
             catch (Exception ex)
@@ -239,8 +168,14 @@ namespace Server
             }
             finally
             {
-                Console.WriteLine("Client disconnected.");
-                ActiveClient.Remove(client);
+                Console.WriteLine($"Client {client.username} disconnected.");
+                lock (clientListLock)
+                {
+                    ActiveClient.Remove(client);
+                }
+                Send_to_All(client, $"[SERVER]: {client.username} left the chat.");
+                Send_to_All(null, $"/exit_client {client.username}", false);
+
                 client.TcpClient.Close();
             }
         }
@@ -256,17 +191,16 @@ namespace Server
                 if (EXIT_WORDS.Contains(adminInput))
                 {
                     Console.WriteLine("Shutting down server...");
-
-                    serverRunning = false; // Prekida glavnu petlju
-
-                    // Obavesti sve klijente i zatvori ih
-                    foreach (Client client in ActiveClient)
+                    serverRunning = false;
+                    lock (clientListLock)
                     {
-                        Send_to(client, "[SERVER] Server is shutting down. Disconnected.", default_encoder);
-                        client.TcpClient.Close();
+                        foreach (Client client in ActiveClient)
+                        {
+                            Send_to(client, "[SERVER] Server is shutting down. Disconnected.", default_encoder);
+                            client.TcpClient.Close();
+                        }
+                        ActiveClient.Clear();
                     }
-
-                    ActiveClient.Clear();
                     server.Stop();
                     break;
                 }
@@ -277,14 +211,12 @@ namespace Server
         {
             IPAddress ipAddress = IPAddress.Any;
             int ipPort = 5050;
-
             TcpListener server = new TcpListener(ipAddress, ipPort);
             server.Start();
 
             Console.WriteLine($"Server is listening on {ipAddress}:{ipPort}");
             Console.WriteLine("Waiting for connections...");
 
-            // Pokrećemo admin input u posebnom thread-u
             Task.Run(() => HandleAdminInput(server));
 
             while (serverRunning)
@@ -292,7 +224,10 @@ namespace Server
                 try
                 {
                     Client client = new Client(server.AcceptTcpClient());
-                    ActiveClient.Add(client);
+                    lock (clientListLock)
+                    {
+                        ActiveClient.Add(client);
+                    }
                     Task.Run(() => HandleClient(client));
                 }
                 catch (SocketException)
@@ -301,8 +236,8 @@ namespace Server
                     break;
                 }
             }
-
             Console.WriteLine("Server shut down.");
+            
         }
     }
 }
