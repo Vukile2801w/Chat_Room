@@ -11,6 +11,11 @@
         "Path": "Client\\Client.csproj",
         "Action": "Start",
         "DebugTarget": "Client"
+      },
+      {
+        "Path": "UI\\UI.csproj",
+        "Action": "Start",
+        "DebugTarget": "UI"
       }
     ]
   },
