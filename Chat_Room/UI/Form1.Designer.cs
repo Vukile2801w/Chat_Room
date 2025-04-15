@@ -36,12 +36,12 @@
             Active_Users_textbox = new RichTextBox();
             Poruka_textbox = new TextBox();
             MainMenu = new Panel();
-            IP_textbox = new TextBox();
-            label5 = new Label();
-            Username_textbox = new TextBox();
             Povezi_Se = new Button();
+            label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            Username_textbox = new TextBox();
+            IP_textbox = new TextBox();
             Port_textbox = new TextBox();
             Caskanje.SuspendLayout();
             MainMenu.SuspendLayout();
@@ -118,43 +118,18 @@
             // 
             // MainMenu
             // 
-            MainMenu.Controls.Add(IP_textbox);
-            MainMenu.Controls.Add(label5);
-            MainMenu.Controls.Add(Username_textbox);
             MainMenu.Controls.Add(Povezi_Se);
+            MainMenu.Controls.Add(label5);
             MainMenu.Controls.Add(label4);
             MainMenu.Controls.Add(label3);
+            MainMenu.Controls.Add(Username_textbox);
+            MainMenu.Controls.Add(IP_textbox);
             MainMenu.Controls.Add(Port_textbox);
             MainMenu.Dock = DockStyle.Fill;
             MainMenu.Location = new Point(0, 0);
             MainMenu.Name = "MainMenu";
             MainMenu.Size = new Size(944, 681);
             MainMenu.TabIndex = 8;
-            // 
-            // IP_textbox
-            // 
-            IP_textbox.Location = new Point(369, 284);
-            IP_textbox.Name = "IP_textbox";
-            IP_textbox.Size = new Size(100, 23);
-            IP_textbox.TabIndex = 0;
-            IP_textbox.Text = "192.168.0.29";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(404, 310);
-            label5.Name = "label5";
-            label5.Size = new Size(85, 15);
-            label5.TabIndex = 6;
-            label5.Text = "Korisničko ime";
-            // 
-            // Username_textbox
-            // 
-            Username_textbox.Location = new Point(367, 319);
-            Username_textbox.Name = "Username_textbox";
-            Username_textbox.Size = new Size(156, 23);
-            Username_textbox.TabIndex = 5;
-            Username_textbox.Text = "User0";
             // 
             // Povezi_Se
             // 
@@ -165,6 +140,15 @@
             Povezi_Se.Text = "Poveži se";
             Povezi_Se.UseVisualStyleBackColor = true;
             Povezi_Se.Click += Povezi_Se_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(404, 310);
+            label5.Name = "label5";
+            label5.Size = new Size(85, 15);
+            label5.TabIndex = 6;
+            label5.Text = "Korisničko ime";
             // 
             // label4
             // 
@@ -184,23 +168,40 @@
             label3.TabIndex = 2;
             label3.Text = "IP adresa";
             // 
+            // Username_textbox
+            // 
+            Username_textbox.Location = new Point(367, 319);
+            Username_textbox.Name = "Username_textbox";
+            Username_textbox.PlaceholderText = "User0";
+            Username_textbox.Size = new Size(156, 23);
+            Username_textbox.TabIndex = 5;
+            Username_textbox.TextChanged += Username_textbox_TextChanged;
+            // 
+            // IP_textbox
+            // 
+            IP_textbox.Location = new Point(369, 284);
+            IP_textbox.Name = "IP_textbox";
+            IP_textbox.PlaceholderText = "192.168._._";
+            IP_textbox.Size = new Size(100, 23);
+            IP_textbox.TabIndex = 0;
+            // 
             // Port_textbox
             // 
             Port_textbox.Location = new Point(475, 284);
             Port_textbox.Name = "Port_textbox";
+            Port_textbox.PlaceholderText = "5050";
             Port_textbox.Size = new Size(49, 23);
             Port_textbox.TabIndex = 1;
-            Port_textbox.Text = "5050";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(944, 681);
-            Controls.Add(Caskanje);
             Controls.Add(MainMenu);
+            Controls.Add(Caskanje);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Chat Room";
             Load += Form1_Load;
             Caskanje.ResumeLayout(false);
             Caskanje.PerformLayout();

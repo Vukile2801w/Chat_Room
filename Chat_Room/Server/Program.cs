@@ -10,11 +10,12 @@ namespace Server
 {
     class Program
     {
-        public static uint curect_id = 0;
         private static readonly object clientListLock = new object();
 
         private class Client
         {
+            private static uint curect_id = 0;
+
             public TcpClient TcpClient;
             public NetworkStream stream;
             public string username;
@@ -97,14 +98,13 @@ namespace Server
                 else if (tokens[1] == "set" && tokens.Length > 2)
                 {
                     client.username = tokens[2].Trim();
-                    response = "Postavljeno";
+                    response = "OK";
                 }
             }
             return response.EndsWith("-nr") ? response[..^4] : response;
         }
 
 
-        private static string lastReceivedMessage = "";
         private static void HandleClient(Client client)
         {
             try
@@ -132,13 +132,8 @@ namespace Server
                     Thread.Sleep(25);
                 }
 
-
-
-
-
-
-
                 Send_to_All(client, $"[SERVER]: {client.username} joined the chat.");
+
 
                 while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                 {
@@ -146,18 +141,13 @@ namespace Server
 
                     string receivedMessage = Recv_from(buffer, bytesRead, default_encoder);
 
-                    if (receivedMessage == lastReceivedMessage)
-                    {
-                        continue; // Ignoriši duplikate
-                    }
 
-                    if (HandleCommand(client, receivedMessage) == "Postavljeno")
+                    if (HandleCommand(client, receivedMessage) == "OK")
                     {
                         continue;
                     }
                     
 
-                    lastReceivedMessage = receivedMessage; // Zapamti poslednju poruku
                     Console.WriteLine($"Received: {client.username}: {receivedMessage.Trim()}");
                     Send_to_All(client, receivedMessage);
                 }
@@ -209,12 +199,21 @@ namespace Server
 
         static void Main(string[] args)
         {
+            
             IPAddress ipAddress = IPAddress.Any;
             int ipPort = 5050;
             TcpListener server = new TcpListener(ipAddress, ipPort);
             server.Start();
 
-            Console.WriteLine($"Server is listening on {ipAddress}:{ipPort}");
+            // Dobijanje lokalne IP adrese klijenta, u slucaju da je rezultat null postavljamo Unknown IP
+            string localIP = Dns.GetHostEntry(Dns.GetHostName())
+                .AddressList
+                .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork)
+                ?.ToString()     // ?  poziva samo ako vrednost nije null
+                ?? "Unknown IP"; // ?? postavlja vrednost samo ako je null
+
+
+            Console.WriteLine($"Server is listening on {localIP}:{ipPort}");
             Console.WriteLine("Waiting for connections...");
 
             Task.Run(() => HandleAdminInput(server));

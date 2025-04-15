@@ -29,7 +29,7 @@ namespace UI
             scene.Add("MainMenu", MainMenu);
             scene.Add("Chat", Caskanje);
 
-            
+
 
         }
 
@@ -41,8 +41,9 @@ namespace UI
 
         private void Handle_New_Message(string msg)
         {
-            Invoke((MethodInvoker)delegate {
-                Chat_History.Text += $"{msg}\n"; 
+            Invoke((MethodInvoker)delegate
+            {
+                Chat_History.Text += $"{msg}\n";
             });
         }
 
@@ -51,13 +52,14 @@ namespace UI
             if (Active_Users.ContainsKey(msg)) return;
             else
             {
-                Invoke((MethodInvoker)delegate {
+                Invoke((MethodInvoker)delegate
+                {
                     Active_Users.Add(msg, Active_Users.Count);
                     Active_Users_textbox.Text += $"{msg}\n";  // Dodavanje korisnika u tekstbox
                 });
             }
 
-            
+
         }
 
 
@@ -77,7 +79,8 @@ namespace UI
                 }
 
                 // Ukloni korisnika iz liste
-                Invoke((MethodInvoker)delegate {
+                Invoke((MethodInvoker)delegate
+                {
                     Active_Users.Remove(msg);
                     Active_Users_textbox.Text = string.Join("\n", Active_Users.Keys);  // Ponovo popuni TextBox
                 });
@@ -102,8 +105,25 @@ namespace UI
             try
             {
                 ip_adress = IPAddress.Parse(IP_textbox.Text);
-                port = int.Parse(Port_textbox.Text);
+
+                string port_txt;
+
+                if (Port_textbox.Text == "")
+                {
+                    port_txt = Port_textbox.PlaceholderText;
+                }
+                else
+                {
+                    port_txt = Port_textbox.Text;
+                }
+
+                    port = int.Parse(port_txt);
                 username = Username_textbox.Text;
+
+                if (username == "")
+                {
+                    username = Username_textbox.PlaceholderText;
+                }
             }
             catch (Exception ex)
             {
@@ -129,7 +149,7 @@ namespace UI
             }
 
 
-            
+
 
 
 
@@ -161,6 +181,11 @@ namespace UI
         }
 
         private void Poruka_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Username_textbox_TextChanged(object sender, EventArgs e)
         {
 
         }
